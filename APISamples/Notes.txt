@@ -1,0 +1,12 @@
+You can see this hosted at:
+http://jennmlin.com/funnel.html?company=getsatisfaction
+
+The only parameter to pass at the command line is the community name. This
+allows for looking at data across any public community.
+
+The topics are from the last week and sorted by status.
+
+The page uses HTML5 to render the visual elements, as it makes the little
+widget a bit more fun. However, nothing in the canvas rendered section of 
+the widget is truly critical functionally, so feel free to take the 
+inspiration and apply it to non-HTML5 environments.
