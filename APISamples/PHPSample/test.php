@@ -29,7 +29,7 @@ require_once "HTTP/Request2.php";
 
 $request = new HTTP_Request2('http://api.getsatisfaction.com/companies/devcommunity/topics.json',
                              HTTP_Request2::METHOD_GET, array());
-//$request->setAuth("jenn+apitest@getsatisfaction.com","servicemax123", HTTP_Request2::AUTH_BASIC);
+//$request->setAuth("USERNAME","PASSWORD", HTTP_Request2::AUTH_BASIC);
 
 $response = $request->send();
 
