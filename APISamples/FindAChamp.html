@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="http://getsatisfaction.com/sites/default/files/getsatisfaction_favicon_0.ico" type="image/x-icon" />
+<title>Community Lab</title>
+<script type="text/javascript" src="jquery-1.7.min.js"></script>
+<style type="text/css">
+#titleText
+{
+    width: 350px;
+    font-family: "Helvetica";
+    font-size: 24px;
+    font-weight:bold;
+    text-align:center;
+}
+
+#main
+{
+    font-family: "Helvetica";
+    font-size: 16px;
+    line-height: 1.25em;
+}
+</style>
+
+<script language="javascript">
+var people = new Array();
+var peopleFinished = 0;
+var count = 0;
+
+// Generic JSON functions
+function JSONscriptRequest(fullUrl) {
+    this.fullUrl = fullUrl; 
+    this.headLoc = document.getElementsByTagName("head").item(0);
+    this.scriptId = 'YJscriptId' + JSONscriptRequest.scriptCounter++;
+}
+JSONscriptRequest.scriptCounter = 1;
+JSONscriptRequest.prototype.buildScriptTag = function () {
+    this.scriptObj = document.createElement("script");
+    this.scriptObj.setAttribute("type", "text/javascript");
+    this.scriptObj.setAttribute("src", this.fullUrl);
+    this.scriptObj.setAttribute("id", this.scriptId);
+}
+JSONscriptRequest.prototype.removeScriptTag = function () {
+    this.headLoc.removeChild(this.scriptObj);  
+}
+JSONscriptRequest.prototype.addScriptTag = function () {
+    this.headLoc.appendChild(this.scriptObj);
+}
+
+function handlerPeople(results) {      
+    jQuery('#peopleLabel').html('Found this many people: ' + results.total);
+    
+    if ( results.total > 0)
+    {
+        count = results.total;
+        var htmlToAdd = '';
+        if (results.total > 30)
+        {
+            count = 30;
+        }
+        for (var i=0; i<count; i++)
+        {
+            if ((!results.data[i].employee) && (!results.data[i].champion))
+            {
+                obj=new JSONscriptRequest('http://api.getsatisfaction.com/people/' + results.data[i].id + '/replies.json?callback=handlerEach');     
+                obj.buildScriptTag(); // Build the script tag     
+                obj.addScriptTag(); // Execute (add) the script tag
+            }
+        }
+    }
+    jQuery('#peopleList').html('Loading member details...')
+}
+
+function handlerEach(results) {      
+    if ( results.total > 0)
+    {
+        var replies = results.total;
+        if (replies > 0)
+        {
+            people[people.length] = [replies, results.data[0].author.canonical_name, results.data[0].author.at_sfn, results.data[0].author.name];
+        }
+    }
+    peopleFinished++;
+    if (peopleFinished >= count - 1)
+    {
+        var htmlToAdd = '';
+        people.sort(compareTotals);
+        for (var i = 0; i < people.length; i++)
+        {
+            htmlToAdd = htmlToAdd + '<a href="' + people[i][2] + '">' + people[i][3] + '</a> has posted ' + people[i][0] + ' replies.<br>';
+        }
+        jQuery('#peopleList').html(htmlToAdd);
+    }
+}
+
+function compareTotals(a, b) {
+    return b[0] - a[0];
+}
+
+</script>
+
+</head>
+<body>
+    <div id="frame">
+        <div id="titleText">
+            Who posts the most?
+        </div><br>
+        <div id="main">
+            <div id="peopleLabel">
+                Loading the people...
+            </div><br>
+            <div id="peopleList">
+                
+            </div>
+        </div>
+    </div>
+  
+  <script language="javascript">
+  
+jQuery(document).ready( function() {
+    var obj;
+    var companyName = "GetSatisfaction"
+    
+    var url = window.location.toString();
+    if (url.indexOf("company=") > 0)
+    {
+        var theleft = url.indexOf("company=") + 8;
+        var theright = url.length;
+        if (url.indexOf("&") > 0)
+        {
+            var theright = url.indexOf("&");
+        }
+        companyName = url.substring(theleft, theright);
+    }
+    
+    jQuery("#titleText").html("Who Posts the Most in the " + companyName + " Community?");
+    
+    obj=new JSONscriptRequest('http://api.getsatisfaction.com/companies/' + companyName + '/people.json?filter=contributors&limit=30&callback=handlerPeople');     
+    obj.buildScriptTag(); // Build the script tag     
+    obj.addScriptTag(); // Execute (add) the script tag
+});
+  </script>
+</body>
+</html>
