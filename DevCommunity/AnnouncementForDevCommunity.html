@@ -1,0 +1,188 @@
+HEAD TAG:
+
+<style type="text/css">
+
+#page
+{
+background-color : #71277A;
+background-image:url('https://sfn-hosted-customizations.s3.amazonaws.com/gears2.jpg');
+background-repeat:repeat;
+}
+
+#company_header
+{
+margin-top: -1px;
+}
+
+#page .mini_profile_icon.employee {
+        border-color: #71277A;
+}
+
+#page .mini_profile_icon.employee .label
+{
+	background-color: #71277A;
+	background-image: none;
+	color: #FFF;
+	line-height: 14px;
+	text-align: center;
+	text-indent: 0;
+}
+
+#page .mini_profile_icon.champion {
+        border-color: #D34614;
+}
+
+#page .mini_profile_icon.champion .label
+{
+	background-color: #D34614;
+	background-image: none;
+	color: #FFF;
+	line-height: 14px;
+	text-align: center;
+	text-indent: 0;
+}
+
+#littleX {
+width: 21px;
+height: 21px;
+overflow: hidden;
+background-image: url(https://s3.amazonaws.com/getsatisfaction.com/images/feedback-close.png);
+background-size: 200%;
+background-color: #71277A;
+position: relative;
+z-index: 1;
+border: 0px;
+margin: 0px 10px 0px 60px;
+vertical-align: middle
+}
+
+#SpecialAlert {
+float: right;
+position: relative;
+width : 337px;
+height : 34px;
+padding-top: 14px;
+margin-right: -338px;
+}
+
+#AlertBox {
+color: white;
+border-color: #51B306;
+background-color: #71277A;
+width : 271px;
+padding: 8px 50px 8px 16px;
+display: block;
+font-size: 1.1em;
+font-weight: bold;
+font-style: normal;
+border-radius: 2px 2px 0 2px;
+border: 1px solid #CCC;
+float : right;
+margin-top : -1px;
+vertical-align : middle;
+}
+
+#specialA:link {color:#FFF;}      /* unvisited link */
+#specialA:visited {color:#EEE;}  /* visited link */
+#specialA:hover {color:#DDD;}  /* mouse over link */
+#specialA:active {color:#EEE;}  /* selected link */
+
+#sub_header { display: none; }
+</style>
+
+
+HEADER HTML:
+
+<div class="clearfix" id="company_header">
+<div id="custom_status"></div>
+<div class="active" id="participation"><div>Get Satisfaction employees are here to help.</div>
+<img alt="corner" style="position: absolute; top: 34px; right: 0;" src="https://assets4.getsatisfaction.com/images/participation_ribbon.png?9dbc186">
+</div>
+<div class="translate" id="claim_link"></div>
+<div class="translate" id="community_tagline">
+Community-powered support for
+<a href="/devcommunity" class="notranslate">Get Satisfaction Developers</a>
+</div>
+<a href="/devcommunity" class="company_logo"><img alt="Get Satisfaction" src="https://s3.amazonaws.com/satisfaction-production/public/uploaded_images/5321751/getsatisfaction-logo_primary-color_full_aspect_medium.png"></a>
+
+</div>
+
+
+FOOTER HTML:
+
+<script language="javascript">
+var visitCt = 5;
+
+document.observe("dom:loaded", function() {
+    var cookieName = '_hasSeenGS_001';
+    var cookieValue = 0;
+    
+    // If the user has cookies enabled, let's show the dialog. Otherwise, don't
+    if (document.cookie.split(";").length > 0)
+    {
+        // Check for existing cookie    
+        var i,x,y,ARRcookies=document.cookie.split(";");
+        for (i=0;i<ARRcookies.length;i++)
+        { 
+            x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+            y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+            x=x.replace(/^\s+|\s+$/g,"");
+            if (x==cookieName)
+            {
+                cookieValue = unescape(y);
+            }
+        }
+    
+        // If none exists, set a cookie.
+        if (cookieValue == null || cookieValue == 0)
+        {
+            cookieValue = 1;   
+        }
+        else if (cookieValue < visitCt)
+        {
+            cookieValue++;
+        }
+        
+        document.cookie = cookieName + "=" + cookieValue + "; expires=Sat, 1 Jan 2050 20:47:11 UTC; path=/";
+    
+        if (cookieValue < visitCt)
+        {
+            jQuery("#SpecialAlert").hide();
+            jQuery("#SpecialAlert").insertAfter("#participation");
+            jQuery("#SpecialAlert").fadeIn("slow");
+        }
+        else
+        {
+            jQuery("#SpecialAlert").hide();
+        }
+    }
+    else
+    {
+        jQuery("#SpecialAlert").hide();
+    }
+
+    jQuery("#customer_membership_button").text("I'm a GS dev.");
+
+    jQuery(".mini_profile_icon.employee .label").text("DEV");
+    jQuery(".mini_profile_icon.champion .label").text("DEV CHAMP");
+});
+
+function maxCookie()
+{
+     var cookieName = '_hasSeenGS_001';
+     cookieValue = visitCt;   
+    
+    document.cookie = cookieName + "=" + cookieValue + "; expires=Sat, 1 Jan 2050 20:47:11 UTC; path=/";
+    jQuery("#SpecialAlert").hide();
+}
+
+ </script>
+
+<div id="SpecialAlert" class="active" >
+    <div id="AlertBox">
+        <img alt="update" src="https://assets1.getsatisfaction.com/images/update_small.png">
+        <a id="specialA" href="http://getsatisfaction.com/jenns_cool_stuff/topics/test-axox1">Topic Close is Here!</a>
+        <button id="littleX" onClick="maxCookie();" />
+    </div>
+    <img alt="corner" style="float: right; margin-top: -1px; margin-right: 2px; position : relative;" src="https://assets4.getsatisfaction.com/images/participation_ribbon.png?9dbc186">
+</div>
