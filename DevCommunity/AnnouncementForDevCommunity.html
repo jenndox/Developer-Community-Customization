@@ -90,6 +90,31 @@ vertical-align : middle;
 #sub_header { display: none; }
 </style>
 
+<script type="text/javascript">
+// Generic JSON functions
+function JSONscriptRequest(fullUrl) {
+    this.fullUrl = fullUrl; 
+    this.headLoc = document.getElementsByTagName("head").item(0);
+    this.scriptId = 'YJscriptId' + JSONscriptRequest.scriptCounter++;
+}
+JSONscriptRequest.scriptCounter = 1;
+JSONscriptRequest.prototype.buildScriptTag = function () {
+    this.scriptObj = document.createElement("script");
+    this.scriptObj.setAttribute("type", "text/javascript");
+    this.scriptObj.setAttribute("src", this.fullUrl);
+    this.scriptObj.setAttribute("id", this.scriptId);
+}
+JSONscriptRequest.prototype.removeScriptTag = function () {
+    this.headLoc.removeChild(this.scriptObj);  
+}
+JSONscriptRequest.prototype.addScriptTag = function () {
+    this.headLoc.appendChild(this.scriptObj);
+}
+</script>
+<!-- start Mixpanel --><script type="text/javascript">var mpq=[];mpq.push(["init","9136ab449888547ee514b31823e70eaa"]);(function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+"//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push([f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links","track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script><!-- end Mixpanel -->
+
+
 
 HEADER HTML:
 
@@ -116,6 +141,9 @@ var visitCt = 5;
 document.observe("dom:loaded", function() {
     var cookieName = '_hasSeenGS_001';
     var cookieValue = 0;
+    
+    // Get the user name and pass to MixPanel.
+    whoAmI();
     
     // If the user has cookies enabled, let's show the dialog. Otherwise, don't
     if (document.cookie.split(";").length > 0)
@@ -145,6 +173,12 @@ document.observe("dom:loaded", function() {
         
         document.cookie = cookieName + "=" + cookieValue + "; expires=Sat, 1 Jan 2050 20:47:11 UTC; path=/";
     
+	if (document.URL == "http://getsatisfaction.com/devcommunity/topics/new_feature_topic_close-g1wf9")
+        {
+             maxCookie();
+             mpq.track('Saw key topic', {'mp_note': 'User went to the key topic.'});
+        }
+    
         if (cookieValue < visitCt)
         {
             jQuery("#SpecialAlert").hide();
@@ -167,6 +201,22 @@ document.observe("dom:loaded", function() {
     jQuery(".mini_profile_icon.champion .label").text("DEV CHAMP");
 });
 
+function whoAmI()
+{
+    obj=new JSONscriptRequest('http://api.getsatisfaction.com/me.json?&callback=handleMe');     
+    obj.buildScriptTag(); // Build the script tag     
+    obj.addScriptTag(); // Execute (add) the script tag
+}
+
+function handleMe(results)
+{
+    if (results. name)
+    {
+        mpq.name_tag(results. name);
+        mpq.track('Visited Community', {'mp_note': 'User visited the community.', 'name': results.name});
+    }
+}
+
 function maxCookie()
 {
      var cookieName = '_hasSeenGS_001';
@@ -174,6 +224,7 @@ function maxCookie()
     
     document.cookie = cookieName + "=" + cookieValue + "; expires=Sat, 1 Jan 2050 20:47:11 UTC; path=/";
     jQuery("#SpecialAlert").hide();
+    mpq.track('Maxed out cookie', {'mp_note': 'User maxed out the cookie.'}); 
 }
 
  </script>
@@ -181,8 +232,10 @@ function maxCookie()
 <div id="SpecialAlert" class="active" >
     <div id="AlertBox">
         <img alt="update" src="https://assets1.getsatisfaction.com/images/update_small.png">
-        <a id="specialA" href="http://getsatisfaction.com/jenns_cool_stuff/topics/test-axox1">Topic Close is Here!</a>
+        <a id="specialA" href="http://getsatisfaction.com/devcommunity/topics/new_feature_topic_close-g1wf9">Topic Close is Here!</a>
         <button id="littleX" onClick="maxCookie();" />
     </div>
     <img alt="corner" style="float: right; margin-top: -1px; margin-right: 2px; position : relative;" src="https://assets4.getsatisfaction.com/images/participation_ribbon.png?9dbc186">
 </div>
+
+<a href="http://mixpanel.com/f/partner"><img src="http://mixpanel.com/site_media/images/partner/badge_blue.png" alt="Real Time Web Analytics" /></a>
