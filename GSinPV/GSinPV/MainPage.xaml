@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="GSinPV.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pv="clr-namespace:System.Windows.Controls.Pivot;assembly=System.Windows.Controls.Pivot"
+    xmlns:conv="clr-namespace:GSinPV"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="400">
+    <UserControl.Resources>
+        <conv:ImageConverter x:Key="imageConvert" />
+        <conv:TextToSolidColorConverter x:Key="colorConverter"/>
+        <Style x:Key="basicAdorner" TargetType="pv:PivotViewerItemAdorner">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <pv:PivotViewerDefaultItemAdorner
+                    IsItemSelected="{Binding IsItemSelected, RelativeSource={RelativeSource TemplatedParent}}"
+                    CommandsRequested="basicAdorner_CommandsRequested"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="topicAdorner" TargetType="pv:PivotViewerItemAdorner" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <pv:PivotViewerDefaultItemAdorner
+                    IsItemSelected="{Binding IsItemSelected, RelativeSource={RelativeSource TemplatedParent}}"
+                    CommandsRequested="topicAdorner_CommandsRequested"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="peopleAdorner" TargetType="pv:PivotViewerItemAdorner">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <pv:PivotViewerDefaultItemAdorner
+                    IsItemSelected="{Binding IsItemSelected, RelativeSource={RelativeSource TemplatedParent}}"
+                    CommandsRequested="peopleAdorner_CommandsRequested"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <pv:PivotViewerItemTemplate x:Key="topicsTemplate">
+            <Border Width="400" Height="300" Background="{Binding style, 
+                    Converter={StaticResource colorConverter}}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding subject}" FontSize="20" FontFamily="Arial Black" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" />
+                    <Image Source="{Binding styleImage, Converter={StaticResource imageConvert}}" Grid.Row="1" HorizontalAlignment="Right" />
+                </Grid>
+            </Border>
+        </pv:PivotViewerItemTemplate>
+        <pv:PivotViewerItemTemplate x:Key="peopleTemplate">
+            <Border Width="400" Height="300" Background="{Binding name, 
+                    Converter={StaticResource colorConverter}}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding name}" FontSize="20" FontFamily="Arial Black" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" />
+                    <Image Source="{Binding avatar_url_large, Converter={StaticResource imageConvert}}" Grid.Row="1" HorizontalAlignment="Right" />
+                </Grid>
+            </Border>
+        </pv:PivotViewerItemTemplate>
+        <pv:PivotViewerItemTemplate x:Key="companyTemplate">
+            <Border Width="400" Height="300" Background="{Binding name, 
+                    Converter={StaticResource colorConverter}}">
+                <TextBlock Text="{Binding name}" FontSize="20" FontFamily="Arial Black" TextWrapping="Wrap"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+        </pv:PivotViewerItemTemplate>
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot" Background="White">
+        <TextBlock x:Name="statusText" Text="Loading GS Communities" />
+        <pv:PivotViewer x:Name="gspivotviewer" ItemsSource="{Binding}" ItemAdornerStyle="{StaticResource basicAdorner}" >
+            <pv:PivotViewer.PivotProperties>
+                <pv:PivotViewerStringProperty Id="name" Options="CanFilter" DisplayName="Name" Binding="{Binding name}" />
+                <pv:PivotViewerStringProperty Id="locale" Options="CanFilter" DisplayName="Locale" Binding="{Binding locale}" />
+                <pv:PivotViewerNumericProperty Id="approximate_topic_count" Options="CanFilter" DisplayName="Topic Count" Binding="{Binding approximate_topic_count}" />
+                <pv:PivotViewerStringProperty Id="logo" Options="CanFilter" DisplayName="Logo" Binding="{Binding logo}" />
+            </pv:PivotViewer.PivotProperties>
+            <pv:PivotViewer.ItemTemplates>
+                <pv:PivotViewerItemTemplate>
+                    <Border Width="400" Height="300" Background="{Binding name, 
+                    Converter={StaticResource colorConverter}}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="200" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding name}" FontFamily="Arial Black" TextWrapping="Wrap" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" />
+                            <Image Source="{Binding logo, Converter={StaticResource imageConvert}}" Grid.Row="1" HorizontalAlignment="Right" />
+                        </Grid>
+                    </Border>
+                </pv:PivotViewerItemTemplate>
+            </pv:PivotViewer.ItemTemplates>
+        </pv:PivotViewer>
+    </Grid>
+</UserControl>
