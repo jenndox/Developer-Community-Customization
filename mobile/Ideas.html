@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="http://getsatisfaction.com/sites/default/files/getsatisfaction_favicon_0.ico" type="image/x-icon" />
+<title>Community Lab: jQuery Mobile Ideas</title>
+<!-- start Mixpanel --><script type="text/javascript">var mpq=[];mpq.push(["init","9136ab449888547ee514b31823e70eaa"]);(function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+"//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push([f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links","track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script><!-- end Mixpanel -->
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js"></script>
+<script language="javascript">
+// Generic JSON functions
+function JSONscriptRequest(fullUrl) {
+    this.fullUrl = fullUrl; 
+    this.headLoc = document.getElementsByTagName("head").item(0);
+    this.scriptId = 'YJscriptId' + JSONscriptRequest.scriptCounter++;
+}
+JSONscriptRequest.scriptCounter = 1;
+JSONscriptRequest.prototype.buildScriptTag = function () {
+    this.scriptObj = document.createElement("script");
+    this.scriptObj.setAttribute("type", "text/javascript");
+    this.scriptObj.setAttribute("src", this.fullUrl);
+    this.scriptObj.setAttribute("id", this.scriptId);
+}
+JSONscriptRequest.prototype.removeScriptTag = function () {
+    this.headLoc.removeChild(this.scriptObj);  
+}
+JSONscriptRequest.prototype.addScriptTag = function () {
+    this.headLoc.appendChild(this.scriptObj);
+}
+
+function handlerTopics(results) {
+    var currentTotal = results.total;
+    jQuery('#results').html('Found this many topics overall: ' + currentTotal);
+    
+    if ( currentTotal > 0 )
+    {
+        var htmlToAdd = "<h2>Recent Ideas:</h2>";
+        if (currentTotal > 20)
+        {
+            currentTotal = 20;
+        }
+        for (var idx=0; idx<currentTotal; idx++)
+        {
+            if (results.data[idx])
+            {
+                htmlToAdd = htmlToAdd + '<p><a href="http://jennmlin.com/mobile/Topic.html?topic=' + results.data[idx].id + '" data-role="button" data-icon="info">' + results.data[idx].subject + '</a></p>';
+            }
+        }
+        htmlToAdd = htmlToAdd + '<br>';
+        jQuery('div.demo-container').html(htmlToAdd);
+    }
+}
+</script>
+
+</head>
+<body>
+<div data-role="pageIdeas">
+    <div data-role="header">
+	<h1>Recent Ideas</h1>
+    </div><!-- /header -->
+    <div data-role="content">
+        
+        <p><a href="http://jennmlin.com/mobile/index.html" data-role="button" data-icon="home" data-theme="a">Home</a></p>
+        <p><a href="http://jennmlin.com/mobile/Search.html" data-role="button" data-icon="search" data-theme="b">Search</a></p>
+        <br />
+        <div id="results" class="demo-container">
+        </div>
+    </div>
+</div>
+
+<script language="javascript">
+jQuery(document).ready( function() {
+var obj;
+
+var companyName = "getsatisfaction";
+
+var url = window.location.toString();
+if (url.indexOf("company=") > 0)
+{
+    var theleft = url.indexOf("company=") + 8;
+    var theright = url.length;
+    if (url.indexOf("&") > 0)
+    {
+        var theright = url.indexOf("&");
+    }
+    companyName = url.substring(theleft, theright);
+}
+
+mpq.track('Visited jQuery Mobile', {'mp_note': 'User visited the jQuery mobile.', 'community': companyName}); 
+
+obj=new JSONscriptRequest('https://api.getsatisfaction.com/companies/' + companyName + '/topics.json?sort=recently_active&style=idea&callback=handlerTopics');     
+obj.buildScriptTag(); // Build the script tag     
+obj.addScriptTag(); // Execute (add) the script tag
+});
+</script>
+</body>
+</html>

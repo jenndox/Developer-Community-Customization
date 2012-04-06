@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="http://getsatisfaction.com/sites/default/files/getsatisfaction_favicon_0.ico" type="image/x-icon" />
+<title>Community Lab: jQuery Mobile Ideas</title>
+<!-- start Mixpanel --><script type="text/javascript">var mpq=[];mpq.push(["init","9136ab449888547ee514b31823e70eaa"]);(function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+"//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push([f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links","track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script><!-- end Mixpanel -->
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js"></script>
+<script language="javascript">
+    
+var linkUrl = "";
+var haveReplies = false;
+    
+// Generic JSON functions
+function JSONscriptRequest(fullUrl) {
+    this.fullUrl = fullUrl; 
+    this.headLoc = document.getElementsByTagName("head").item(0);
+    this.scriptId = 'YJscriptId' + JSONscriptRequest.scriptCounter++;
+}
+JSONscriptRequest.scriptCounter = 1;
+JSONscriptRequest.prototype.buildScriptTag = function () {
+    this.scriptObj = document.createElement("script");
+    this.scriptObj.setAttribute("type", "text/javascript");
+    this.scriptObj.setAttribute("src", this.fullUrl);
+    this.scriptObj.setAttribute("id", this.scriptId);
+}
+JSONscriptRequest.prototype.removeScriptTag = function () {
+    this.headLoc.removeChild(this.scriptObj);  
+}
+JSONscriptRequest.prototype.addScriptTag = function () {
+    this.headLoc.appendChild(this.scriptObj);
+}
+
+function handlerTopic(results) {
+    if ( results )
+    {
+        var htmlToAdd = "<h2>Current Topic:</h2>";
+	linkUrl = results.at_sfn.replace("http:", "https:");
+	htmlToAdd = htmlToAdd + '<p><a href="' + linkUrl + '" data-role="button" data-icon="star">' + results.subject + '</a></p>';
+	htmlToAdd = htmlToAdd + '<p>' + results.content + '</p>';
+        htmlToAdd = htmlToAdd + '<br>';
+        jQuery('div.demo-container').html(htmlToAdd);
+	
+	if (results.active_replies > 0)
+	{
+	    var obj=new JSONscriptRequest('https://api.getsatisfaction.com/topics/' + results.ID + '/replies.json?sort=recently_created&callback=handlerReplies');     
+	    obj.buildScriptTag(); // Build the script tag     
+	    obj.addScriptTag(); // Execute (add) the script tag
+	}
+    }
+}
+
+function handlerReplies(results) {
+    if ( results && ! haveReplies )
+    {
+	var currentTotal = results.total;
+        var htmlToAdd =  jQuery('div.demo-container').html() + "<h2>Latest Replies:</h2>";
+	if (currentTotal > 20)
+        {
+            currentTotal = 20;
+        }
+        for (var idx=0; idx<currentTotal; idx++)
+        {
+            if (results.data[idx])
+            {
+		htmlToAdd = htmlToAdd + '<p><a href="' + linkUrl + '#reply_' + results.data[idx].id +'" data-role="button" data-icon="star">Reply #' + (idx + 1) + '</a>: ';
+		htmlToAdd = htmlToAdd + results.data[idx].content + '</p>';
+		htmlToAdd = htmlToAdd + '<br>';
+	    }
+	}
+        jQuery('div.demo-container').html(htmlToAdd);
+    }
+    haveReplies = true;
+}
+</script>
+
+</head>
+<body>
+<div data-role="pageTopic">
+    <div data-role="header">
+	<h1>Recent Ideas</h1>
+    </div><!-- /header -->
+    <div data-role="content">
+        
+        <p><a href="http://jennmlin.com/mobile/index.html" data-role="button" data-icon="home" data-theme="a">Home</a></p>
+        <p><a href="http://jennmlin.com/mobile/Search.html" data-role="button" data-icon="search" data-theme="b">Search</a></p>
+	<p><a href="http://jennmlin.com/mobile/Search.html" data-role="button" data-icon="search" data-theme="e" data-rel="back">Back to Topic List</a></p>
+        <br />
+        <div id="results" class="demo-container">
+        </div>
+    </div>
+</div>
+
+<script language="javascript">
+$(document).ready( function() {
+    var obj;
+    
+    var theleft = 0;
+    var theright = 0;
+    var url = window.location.toString();
+    var topicID = 0;
+    if (url.indexOf("topic=") > 0)
+    {
+	theleft = url.indexOf("topic=") + 6;
+	theright = url.length;
+	if (url.indexOf("&") > 0)
+	{
+	    var theright = url.indexOf("&");
+	}
+	topicID = url.substring(theleft, theright);
+    }
+    
+    obj=new JSONscriptRequest('https://api.getsatisfaction.com/topics/' + topicID + '.json?callback=handlerTopic');     
+    obj.buildScriptTag(); // Build the script tag     
+    obj.addScriptTag(); // Execute (add) the script tag
+});
+</script>
+</body>
+</html>
