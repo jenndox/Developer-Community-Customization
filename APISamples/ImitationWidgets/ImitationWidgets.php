@@ -43,7 +43,7 @@ jQuery(document).ready(function(){
                 },
                 submitHandler: function(form) {
                         // do other stuff for a valid form
-                        jQuery.post('SearchFr.php', jQuery("#search").serialize(), function(data) {
+                        jQuery.post('DoSearch.php', jQuery("#search").serialize(), function(data) {
                                 jQuery('#results').html(data);
                         });
                 }
