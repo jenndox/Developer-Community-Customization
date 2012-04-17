@@ -1,0 +1,100 @@
+HEAD TAG:
+
+<script type="text/javascript">
+// Generic JSON functions to make API requests
+function JSONscriptRequest(fullUrl) {
+    this.fullUrl = fullUrl; 
+    this.headLoc = document.getElementsByTagName("head").item(0);
+    this.scriptId = 'YJscriptId' + JSONscriptRequest.scriptCounter++;
+}
+JSONscriptRequest.scriptCounter = 1;
+JSONscriptRequest.prototype.buildScriptTag = function () {
+    this.scriptObj = document.createElement("script");
+    this.scriptObj.setAttribute("type", "text/javascript");
+    this.scriptObj.setAttribute("src", this.fullUrl);
+    this.scriptObj.setAttribute("id", this.scriptId);
+}
+JSONscriptRequest.prototype.removeScriptTag = function () {
+    this.headLoc.removeChild(this.scriptObj);  
+}
+JSONscriptRequest.prototype.addScriptTag = function () {
+    this.headLoc.appendChild(this.scriptObj);
+}
+</script>
+
+<!-- start Mixpanel --><!-- YOUR MIXPANEL CODE HERE --><!-- end Mixpanel -->
+
+
+
+
+
+
+FOOTER HTML:
+
+
+<script language="javascript">
+
+// On Topic creation, execute the logNewTopic function.
+jQuery("#topic_submit_button").click(function() {
+    logNewTopic();
+});
+
+// On Reply creation, execute the logNewTopic function.
+jQuery(".reply form_submit").click(function() {
+    logNewReply();
+});
+
+// On Searching topics, execute the logNewTopic function.
+jQuery(".search_submit_widget").click(function() {
+    logNewSearch();
+});
+
+// On page load, call the function to get information about the currently logged in customer.
+jQuery(document).ready(function () {
+    whoAmI();
+});
+
+// Call the API to find out more details about the currently logged in customer.
+function whoAmI()
+{
+    // Build the API request
+    obj=new JSONscriptRequest('https://api.getsatisfaction.com/me.json?&callback=handleMe');     
+    obj.buildScriptTag(); // Build the script tag     
+    obj.addScriptTag(); // Execute (add) the script tag
+}
+
+// Handle the API request results. 
+function handleMe(results)
+{
+    if (results. name)
+    {
+        mpq.register({ mp_name_tag: results.name, distinct_id: results.canonical_name });
+    }
+}
+
+// For a new topic, track the properties that are interesting, like the subject, body, and type.
+function logNewTopic()
+{
+    mpq.track("Topic Created", {
+	"Topic Subject": jQuery("#topic_subject").val(), 
+	"Topic Body": jQuery("#topic_additional_detail").val(),
+	"Topic Type": jQuery("#style_picker").val(),
+	});
+}
+
+// For a new reply, track the properties that are interesting, like the body
+function logNewReply()
+{
+    mpq.track("Reply Created", {
+	"Reply Body": jQuery("#reply_content").val(),
+	});
+}
+
+// For a new search of the community, track the query string used.
+function logNewSearch()
+{
+    mpq.track("Searched", {
+	"Search Query": jQuery("#search_query").val(),
+	});
+}
+ </script>
