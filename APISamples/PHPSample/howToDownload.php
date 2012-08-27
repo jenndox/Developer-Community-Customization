@@ -34,7 +34,7 @@ $myFile = @"file:///FOLDER/FILENAME.txt";
 $fh = fopen($myFile, 'w') or die("can't open file");
 
 
-$request = new HTTP_Request2('https://api.getsatisfaction.com/companies/devcommunity/topics.json?limit=30', HTTP_Request2::METHOD_GET); 
+$request = new HTTP_Request2('https://api.getsatisfaction.com/companies/YOURCOMMUNITY/topics.json?limit=30', HTTP_Request2::METHOD_GET); 
 $request->setAuth("YOUR EMAIL ADDRESS","YOUR PASSWORD", HTTP_Request2::AUTH_BASIC); 
 
 $newHeader = 'Content-type: application/json'; 
@@ -62,8 +62,8 @@ if ($queyData["total"] > $newCount)
     echo $queyData["total"];
     for ($idx=0; $idx< ($queyData["total"] / 30); $idx++)
     {
-        $newrequest = new HTTP_Request2('https://api.getsatisfaction.com/companies/devcommunity/topics.json?limit=30&page=' . $idx, HTTP_Request2::METHOD_GET);
-        $newrequest->setAuth("jenn@getsatisfaction.com","th3schne", HTTP_Request2::AUTH_BASIC); 
+        $newrequest = new HTTP_Request2('https://api.getsatisfaction.com/companies/YOURCOMMUNITY/topics.json?limit=30&page=' . $idx, HTTP_Request2::METHOD_GET);
+        $newrequest->setAuth("YOUR EMAIL ADDRESS","YOUR PASSWORD", HTTP_Request2::AUTH_BASIC); 
         $newrequest->setHeader($newHeader); 
         $newresponse = $newrequest->send(); 
         
@@ -87,7 +87,7 @@ if ($queyData["total"] > $newCount)
             echo "</div></p>";
             
             $replyrequest = new HTTP_Request2('https://api.getsatisfaction.com/topics/' . $queyData["data"][$i]["id"] . '/replies.json', HTTP_Request2::METHOD_GET);
-            $replyrequest->setAuth("jenn@getsatisfaction.com","th3schne", HTTP_Request2::AUTH_BASIC); 
+            $replyrequest->setAuth("YOUR EMAIL ADDRESS","YOUR PASSWORD", HTTP_Request2::AUTH_BASIC); 
             $replyrequest->setHeader($newHeader); 
             $replyresponse = $replyrequest->send(); 
             $replybody = $replyresponse->getBody(); 
