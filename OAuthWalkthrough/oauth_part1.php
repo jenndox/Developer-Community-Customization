@@ -28,7 +28,7 @@ font-size: 12px;
 <?php 
 echo '<div id="titleText">How to Make Oauth API calls Part 1</div><br /> <br />'; 
 
-require_once "FastPass/OAuth.php";
+require_once "OAuth.php";
 
       $origKey = '12345'; $origSecret = '1234567890';
       $consumer = new OAuthConsumer($origKey, $origSecret);
