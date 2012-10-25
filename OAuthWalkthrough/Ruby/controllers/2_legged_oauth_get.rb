@@ -17,7 +17,7 @@ access_token = OAuth::AccessToken.new(consumer)
 
 request_headers = {'Content-Type' => 'application/json'}
 
-api_url_path    = "/companies/people/jenndox.json"
+api_url_path    = "/people/jenndox.json"
 
 # --- for get ---
 users_response = access_token.get(api_url_path, request_headers)
