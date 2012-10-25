@@ -9,7 +9,7 @@ CONSUMER_SECRET = "1234567890"
 
 # Set the http method and the API endpoint
 http_method     = :get
-api_host        = "http://api.getsatisfaction.com"
+api_host        = "https://api.getsatisfaction.com"
 
 consumer = OAuth::Consumer.new(CONSUMER_KEY, CONSUMER_SECRET, :site => api_host, :http_method => http_method)
 access_token = OAuth::AccessToken.new(consumer)
