@@ -1,0 +1,168 @@
+HEAD TAG:
+<style>
+
+.banner 
+{
+display: none;
+margin-left: auto;
+margin-right: auto;
+-webkit-animation-delay: 0s;
+-webkit-animation-direction: normal;
+-webkit-animation-duration: 5s;
+-webkit-animation-fill-mode: none;
+-webkit-animation-iteration-count: infinite;
+-webkit-animation-name: animate-bg;
+-webkit-animation-timing-function: linear;
+-webkit-background-size: 40px 40px;
+background-attachment: scroll;
+background-clip: border-box;
+background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.046875) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.046875) 50%, rgba(255, 255, 255, 0.046875) 75%, transparent 75%, transparent);
+background-origin: padding-box;
+background-size: 40px 40px;
+border-style: solid;
+border-width: 1px;
+color: purple;
+/* display: block; 
+font-family: sans-serif; */
+font-size: 13px;
+font-style: normal;
+font-variant: normal;
+font-weight: normal;
+height: 21px;
+line-height: 15px;
+outline-color: white;
+outline-style: none;
+outline-width: 0px;
+overflow-y: visible;
+padding: 15px;
+text-shadow: grey 0px 1px 0px;
+vertical-align: baseline;
+width: 948px;
+}
+
+.banner a {
+    color: white;
+    text-decoration: underline;
+}
+
+.banner h3
+{
+                 margin: 3px 0 10px 40px;
+}
+
+.banner p
+{
+                 margin: 0;
+}
+
+#littleX {
+block: inline;
+float: right; 
+width: 21px;
+height: 21px;
+overflow: hidden;
+background-image: url(https://s3.amazonaws.com/getsatisfaction.com/images/feedback-close.png);
+background-size: 200%;
+position: relative;
+z-index: 1;
+border: 0px;
+margin: 0px;
+vertical-align: middle
+}
+
+
+#alertmessage 
+{ 
+float: left; 
+height:32px;
+background-image: url(https://d37wxxhohlp07s.cloudfront.net/s3_images/722489/megaphone-25.png);
+background-repeat: no-repeat;
+z-index: 1;
+}
+
+
+
+</style>
+
+
+
+
+HEADER HTML:
+
+<div class="info banner" id="SpecialAlert">
+<div id=alertmessage><h3><a href="https://getsatisfaction.com/getsatisfaction/topics/product_roadmap_webcast_on_10_30"/>Product Roadmap Webcast on 10/30!</a></h3></div>
+<div id="littleX" onClick="maxCookie();"></div>
+</div>
+
+
+FOOTER HTML:
+
+<script language="javascript">
+var visitCt = 5;
+
+document.observe("dom:loaded", function() {
+    var cookieName = '_hasSeenGS_001';
+    var cookieValue = 0;
+    
+    // If the user has cookies enabled, let's show the dialog. Otherwise, don't
+    if (document.cookie.split(";").length > 0)
+    {
+        // Check for existing cookie    
+        var i,x,y,ARRcookies=document.cookie.split(";");
+        for (i=0;i<ARRcookies.length;i++)
+        { 
+            x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+            y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+            x=x.replace(/^\s+|\s+$/g,"");
+            if (x==cookieName)
+            {
+                cookieValue = unescape(y);
+            }
+        }
+    
+        // If none exists, set a cookie.
+        if (cookieValue == null || cookieValue == 0)
+        {
+            cookieValue = 1;   
+        }
+        else if (cookieValue < visitCt)
+        {
+            cookieValue++;
+        }
+        
+        document.cookie = cookieName + "=" + cookieValue + "; expires=Sat, 1 Jan 2050 20:47:11 UTC; path=/";
+    
+	if (document.URL == "http://getsatisfaction.com/devcommunity/topics/new_feature_topic_close-g1wf9")
+        {
+             maxCookie();
+        }
+    
+        if (cookieValue < visitCt)
+        {
+            jQuery("#SpecialAlert").hide();
+            jQuery("#SpecialAlert").insertAfter("#participation");
+            jQuery("#SpecialAlert").fadeIn("slow");
+        }
+        else
+        {
+            jQuery("#SpecialAlert").hide();
+        }
+    }
+    else
+    {
+        jQuery("#SpecialAlert").hide();
+    }
+});
+
+
+function maxCookie()
+{
+     var cookieName = '_hasSeenGS_001';
+     cookieValue = visitCt;   
+    
+    document.cookie = cookieName + "=" + cookieValue + "; expires=Sat, 1 Jan 2050 20:47:11 UTC; path=/";
+    jQuery("#SpecialAlert").hide();
+    mpq.track('Maxed out cookie', {'mp_note': 'User maxed out the cookie.'}); 
+}
+
+ </script>
