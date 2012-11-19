@@ -1,0 +1,125 @@
+﻿body 
+{
+    color: black;
+}
+
+.detailsPane
+{
+    height:200px;
+    width: 380px;
+    background-color: #D7FFB2;
+    font-family: "Helvetica";
+    font-size: 16px;
+    padding:10px;
+    margin-top:0px;
+    border-bottom:5px solid #508F14;
+    overflow-x:auto;overflow-y:scroll;
+    line-height: 1.25em;
+    margin-left: auto;
+    margin-right: auto;
+}
+#canvasHome 
+{
+    display: none;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.detailTitle
+{
+    margin-bottom:5px;
+    background-color: #D7FFB2;
+    font-family: "Helvetica";
+    font-size: 24px;
+    font-weight:bold;
+    text-align:center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.label
+{
+    height:auto;
+    width: 65px;
+    vertical-align: middle;
+    font-family: "Helvetica";
+    font-size: 16px;
+    font-weight:bold;
+    float: left;
+    text-align:center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#labelList
+{
+    list-style-type: none;
+    -webkit-padding-start: 0px;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 0em;
+    margin-left : 0px;
+}
+
+#funnelLabel
+{
+    margin-left : 0px !important;
+    width: 90px;
+}
+
+#beakerLabel
+{
+    width: 90px;
+}
+
+#rocketLabel
+{
+    margin-right : 0px;
+}
+
+#titleText
+{
+    width: 380px;
+    font-family: "Helvetica";
+    font-size: 24px;
+    font-weight:bold;
+    text-align:center;
+}
+
+#frame
+{
+    border : 5px solid #2D1E4E;
+    background : #BEAFE0;
+    height : 503px;
+    width : 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#prompt {
+    padding: 5px;
+    padding-left:10px
+}
+
+#GSLabFunnel 
+{
+    margin-left:10px;
+}
+
+#noneDetails
+{    
+display:none;
+}
+#pendingDetails
+{    
+display:none;
+}
+#activeDetails
+{    
+display:none;
+}
+#completeDetails
+{    
+display:none;
+}

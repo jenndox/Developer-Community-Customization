@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>JENN8</Machine>
+    <WindowsUser>jenn__000</WindowsUser>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <RegisteredManifestChecksum>273451540663AF97E5BE05F1AE070802B4206354A8610225868C42D99F3FBFDB</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>7d63a263-7dd4-4da7-baf1-1fcea3194e34_1.0.0.0_neutral__51dnftd7hwsd4</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>7d63a263-7dd4-4da7-baf1-1fcea3194e34_51dnftd7hwsd4!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>7d63a263-7dd4-4da7-baf1-1fcea3194e34</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=jenn__000</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\jenn__000\Documents\Visual Studio 2012\Projects\Funnel\Funnel\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-11-19T01:47:43.443</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\jenn__000\Documents\Visual Studio 2012\Projects\Funnel\Funnel\default.html">
+      <PackagePath>default.html</PackagePath>
+      <Modified>2012-11-19T02:01:15.359</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\jenn__000\Documents\Visual Studio 2012\Projects\Funnel\Funnel\js\Funnel.html">
+      <PackagePath>js\Funnel.html</PackagePath>
+      <Modified>2012-11-18T09:59:08.085</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\jenn__000\Documents\Visual Studio 2012\Projects\Funnel\Funnel\images\jar-gon.png">
+      <PackagePath>images\jar-gon.png</PackagePath>
+      <Modified>2012-11-19T01:46:37.564</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\jenn__000\Documents\Visual Studio 2012\Projects\Funnel\Funnel\images\logo.png">
+      <PackagePath>images\logo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-07-26T19:30:08.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\jenn__000\Documents\Visual Studio 2012\Projects\Funnel\Funnel\images\smalllogo.png">
+      <PackagePath>images\smalllogo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-07-26T19:30:08.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\jenn__000\Documents\Visual Studio 2012\Projects\Funnel\Funnel\images\splashscreen.png">
+      <PackagePath>images\splashscreen.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-07-26T19:30:08.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\jenn__000\Documents\Visual Studio 2012\Projects\Funnel\Funnel\images\storelogo.png">
+      <PackagePath>images\storelogo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-07-26T19:30:08.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\jenn__000\Documents\Visual Studio 2012\Projects\Funnel\Funnel\js\default.js">
+      <PackagePath>js\default.js</PackagePath>
+      <Modified>2012-07-05T00:06:04.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\jenn__000\Documents\Visual Studio 2012\Projects\Funnel\Funnel\js\funnel.js">
+      <PackagePath>js\funnel.js</PackagePath>
+      <Modified>2012-11-19T02:00:23.066</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\jenn__000\Documents\Visual Studio 2012\Projects\Funnel\Funnel\js\jQuery.min.js">
+      <PackagePath>js\jQuery.min.js</PackagePath>
+      <Modified>2012-11-18T10:02:14.572</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\jenn__000\Documents\Visual Studio 2012\Projects\Funnel\Funnel\css\default.css">
+      <PackagePath>css\default.css</PackagePath>
+      <Modified>2012-11-19T02:04:10.157</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\jenn__000\Documents\Visual Studio 2012\Projects\Funnel\Funnel\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <Modified>2012-11-19T01:47:43.349</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResolvedSDKReference Include="C:\Program Files\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.WinJS.1.0\1.0\">
+      <Name>Microsoft.WinJS.1.0</Name>
+      <Version>1.0.8514.0</Version>
+      <Architecture>Neutral</Architecture>
+      <FrameworkIdentity>Name=Microsoft.WinJS.1.0, MinVersion=1.0.8514.0</FrameworkIdentity>
+      <AppxLocation>C:\Program Files\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.WinJS.1.0\1.0\Microsoft.WinJS.1.0.appx</AppxLocation>
+    </ResolvedSDKReference>
+  </ItemGroup>
+</Project>

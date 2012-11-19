@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Funnel</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
+
+    <!-- Funnel references -->
+    <link href="/css/default.css" rel="stylesheet" />
+    <script src="/js/default.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/funnel.js"></script>
+</head>
+<body>
+
+    <div id="frame">
+
+        <div id="prompt">
+            Which community are you interested in?
+            <input id="communityInput" type="text" />
+            <button id="startTheLab">Go</button>
+        </div>
+
+
+        <div id="titleText">
+            What's Cooking in the Community Laboratory?
+        </div>
+        <div id="canvasHome">
+            <ul id="labelList">
+                <li class="label" id="funnelLabel">
+                    No Status
+                </li>
+                <li class="label" id="testTubeLabel">
+                    Pending
+                </li>
+                <li class="label" id="beakerLabel">
+                    Active
+                </li>
+                <li class="label" id="rocketLabel">
+                    Complete
+                </li>
+            </ul>
+            
+            <canvas id="GSLabFunnel" width="100" height="80">
+                <img src="/images/jar-gon.png"/>
+            </canvas>
+            <canvas id="GSLabTestTube" width="70" height="80">
+                <img src="/images/jar-gon.png"/>
+            </canvas>
+            <canvas id="GSLabBeaker" width="100" height="80">
+                <img src="/images/jar-gon.png"/>
+            </canvas>
+            <canvas id="GSLabRocket" width="70" height="80">
+                <img src="/images/jar-gon.png"/>
+            </canvas>
+        </div>
+    
+        <div id="DetailView">
+           
+                <div id="noneDetails" class="detailsPane">
+                    <img src="/images/jar-gon.png"/>
+                </div>
+                <div id="pendingDetails" class="detailsPane">
+                    <img src="/images/jar-gon.png"/>
+                </div>
+                <div id="activeDetails" class="detailsPane">
+                    <img src="/images/jar-gon.png"/>
+                </div>
+                <div id="completeDetails" class="detailsPane">
+                    <img src="/images/jar-gon.png"/>
+                </div>
+            
+        </div>
+    </div>
+<script>
+    jQuery("#GSLabFunnel").click(function (e) {
+        jQuery("#noneDetails").slideToggle();
+        jQuery("#pendingDetails").hide("fast");
+        jQuery("#activeDetails").hide("fast");
+        jQuery("#completeDetails").hide("fast");
+    });
+    jQuery("#GSLabTestTube").click(function (e) {
+        jQuery("#noneDetails").hide("fast");
+        jQuery("#pendingDetails").slideToggle();
+        jQuery("#activeDetails").hide("fast");
+        jQuery("#completeDetails").hide("fast");
+    });
+    jQuery("#GSLabBeaker").click(function (e) {
+        jQuery("#noneDetails").hide("fast");
+        jQuery("#pendingDetails").hide("fast");
+        jQuery("#activeDetails").slideToggle();
+        jQuery("#completeDetails").hide("fast");
+    });
+    jQuery("#GSLabRocket").click(function (e) {
+        jQuery("#noneDetails").hide("fast");
+        jQuery("#pendingDetails").hide("fast");
+        jQuery("#activeDetails").hide("fast");
+        jQuery("#completeDetails").slideToggle();
+    });
+    </script>
+</body>
+</html>

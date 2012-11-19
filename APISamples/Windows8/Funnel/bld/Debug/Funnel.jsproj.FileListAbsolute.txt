@@ -1,0 +1,13 @@
+c:\users\jenn__000\documents\visual studio 2012\Projects\Funnel\Funnel\bin\Debug\resources.pri
+c:\users\jenn__000\documents\visual studio 2012\Projects\Funnel\Funnel\bin\Debug\AppxManifest.xml
+c:\users\jenn__000\documents\visual studio 2012\Projects\Funnel\Funnel\bin\Debug\Funnel.build.appxrecipe
+c:\users\jenn__000\documents\visual studio 2012\Projects\Funnel\Funnel\bld\Debug\priconfig.xml.intermediate
+c:\users\jenn__000\documents\visual studio 2012\Projects\Funnel\Funnel\bld\Debug\layout.resfiles.intermediate
+c:\users\jenn__000\documents\visual studio 2012\Projects\Funnel\Funnel\bld\Debug\resources.resfiles.intermediate
+c:\users\jenn__000\documents\visual studio 2012\Projects\Funnel\Funnel\bld\Debug\pri.resfiles.intermediate
+c:\users\jenn__000\documents\visual studio 2012\Projects\Funnel\Funnel\bld\Debug\priconfig.xml
+c:\users\jenn__000\documents\visual studio 2012\Projects\Funnel\Funnel\bld\Debug\layout.resfiles
+c:\users\jenn__000\documents\visual studio 2012\Projects\Funnel\Funnel\bld\Debug\resources.resfiles
+c:\users\jenn__000\documents\visual studio 2012\Projects\Funnel\Funnel\bld\Debug\pri.resfiles
+c:\users\jenn__000\documents\visual studio 2012\Projects\Funnel\Funnel\bld\Debug\LanguageQualifiers.txt
+c:\users\jenn__000\documents\visual studio 2012\Projects\Funnel\Funnel\bld\Debug\ProjectArchitectures.txt
