@@ -1,0 +1,45 @@
+FOOTER HTML:
+
+<div id="platformList" class="selector">
+<select id="platformSelector" onChange="updateProducts();">
+  <option value="platform">Select your platform:</option>
+  <option value="xbox">Xbox 360</option>
+  <option value="ps3">PS3</option>
+  <option value="Handheld">Handheld</option>
+  <option value="Desktop">Desktop</option>
+</select>
+</div>
+
+<script>
+var selectedPlatform = "";
+jQuery(document).ready(function () {
+if (document.URL == "https://getsatisfaction.com/jenns_cool_stuff/topics/new")
+{
+   jQuery("#platformList").insertAfter(".subject");
+}
+else
+{
+   jQuery("#platformList").hide();
+}
+});
+
+function updateProducts()
+{
+    if (selectedPlatform != "")
+    {
+       jQuery.each(jQuery('li', '.product_picker'), function(index, element) { 
+          element = jQuery(element); 
+          if (element.text().toLowerCase().indexOf(selectedPlatform.toLowerCase()) > 0) { 
+            element.children(".product").click();
+          } 
+        }); 
+    }
+    selectedPlatform =  document.getElementById("platformSelector").value;
+    jQuery.each(jQuery('li', '.product_picker'), function(index, element) { 
+          element = jQuery(element); 
+          if (element.text().toLowerCase().indexOf(selectedPlatform.toLowerCase()) > 0) { 
+            element.children(".product").click();
+          } 
+        }); 
+};
+</script>
